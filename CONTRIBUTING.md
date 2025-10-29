@@ -4,15 +4,22 @@ We'd love your help with the eBPF for Windows Sample Program! Here are our contr
 
 ## Table of Contents
 
-- [Code of Conduct](#code-of-conduct)
-- [Bugs](#bugs)
-  - [Did you find a bug?](#did-you-find-a-bug)
-  - [Did you write a patch that fixes a bug?](#did-you-write-a-patch-that-fixes-a-bug)
-- [New Features](#new-features)
-- [Contributor License Agreement](#contributor-license-agreement)
-- [Contributing Code](#contributing-code)
-- [Development Environment](#development-environment)
-- [Pull Request Process](#pull-request-process)
+- [Contributing to eBPF for Windows Sample Program](#contributing-to-ebpf-for-windows-sample-program)
+  - [Table of Contents](#table-of-contents)
+  - [Code of Conduct](#code-of-conduct)
+  - [Bugs](#bugs)
+    - [Did you find a bug?](#did-you-find-a-bug)
+    - [Did you write a patch that fixes a bug?](#did-you-write-a-patch-that-fixes-a-bug)
+  - [New Features](#new-features)
+  - [Contributor License Agreement](#contributor-license-agreement)
+  - [Contributing Code](#contributing-code)
+  - [Development Environment](#development-environment)
+    - [Prerequisites](#prerequisites)
+    - [Building the Sample Programs](#building-the-sample-programs)
+    - [Code Style](#code-style)
+  - [Pull Request Process](#pull-request-process)
+    - [Pull Request Requirements](#pull-request-requirements)
+  - [Getting Help](#getting-help)
 
 ## Code of Conduct
 
@@ -58,7 +65,7 @@ If you would like to contribute, first identify the scale of what you would like
 For all new Pull Requests the following rules apply:
 
 - Existing tests should continue to pass.
-- [Tests](docs/Testing.md) need to be provided for every bug/feature that is completed.
+- Tests need to be provided for every bug/feature that is completed.
 - Documentation needs to be provided for every feature that is end-user visible.
 
 ## Development Environment

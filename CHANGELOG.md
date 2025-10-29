@@ -14,7 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Security guidelines and reporting procedures
 - Code formatting configuration and scripts
 - License checking scripts
-- Testing framework and guidelines
 
 ### Changed
 - Enhanced SECURITY.md with eBPF-specific security considerations

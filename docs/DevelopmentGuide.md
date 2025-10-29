@@ -8,7 +8,6 @@ This guide provides information for contributors to the eBPF for Windows Sample 
 - [Header Files](#header-files)
 - [Style Guide](#style-guide)
 - [Naming Conventions](#naming-conventions)
-- [Testing Guidelines](#testing-guidelines)
 - [Documentation Standards](#documentation-standards)
 
 ## Coding Conventions
@@ -118,21 +117,6 @@ typedef struct _sample_context
 8. Prefix eBPF specific names in the global namespace with `ebpf_` (e.g., `ebpf_result_t`).
 
 Above all, if a file happens to differ in style from these guidelines (e.g., private members are named `m_member` rather than `_member`), the existing style in that file takes precedence.
-
-## Testing Guidelines
-
-### Sample Program Testing
-
-* **DO** include test scripts or instructions for running and validating each sample program.
-* **DO** test sample programs on the supported Windows versions.
-* **DO** include both positive and negative test cases where applicable.
-* **DO** document expected outputs and behaviors.
-
-### Test Organization
-
-* Place test files in a `tests/` directory within each sample program folder.
-* Use descriptive names for test files (e.g., `test_packet_filter.c`, `validate_maps.ps1`).
-* Include setup and cleanup procedures in test documentation.
 
 ## Documentation Standards
 
