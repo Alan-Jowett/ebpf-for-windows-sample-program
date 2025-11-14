@@ -85,8 +85,8 @@ jobs:
         env:
           cache-name: cache-nuget-modules
         with:
-          path: packages
-          key: ${{ runner.os }}-${{env.BUILD_PLATFORM}}-${{env.BUILD_CONFIGURATION}}-${{ hashFiles('**/packages.config') }}
+          path: $env:USERPROFILE\.nuget\packages
+          key: ${{ runner.os }}-${{env.BUILD_PLATFORM}}-${{env.BUILD_CONFIGURATION}}-${{ hashFiles('**/wdk.props') }}
 
       - name: Restore NuGet packages
         if: steps.skip_check.outputs.should_skip != 'true'
@@ -98,8 +98,8 @@ jobs:
         if: steps.skip_check.outputs.should_skip != 'true'
         working-directory: ${{env.GITHUB_WORKSPACE}}
         run: |
-          $env:USERPROFILE\.nuget\packages\ebpf-for-Windows.x64\1.0.0-rc1\build\native\bin\export_program_info.exe --clear
-          $env:USERPROFILE\.nuget\packages\ebpf-for-Windows.x64\1.0.0-rc1\build\native\bin\export_program_info.exe   
+          & "$env:USERPROFILE\.nuget\packages\ebpf-for-Windows.x64\1.0.0-rc1\build\native\bin\export_program_info.exe" --clear
+          & "$env:USERPROFILE\.nuget\packages\ebpf-for-Windows.x64\1.0.0-rc1\build\native\bin\export_program_info.exe"   
 
       - name: Build
         if: steps.skip_check.outputs.should_skip != 'true'
