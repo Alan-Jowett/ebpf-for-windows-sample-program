@@ -105,8 +105,13 @@ jobs:
         if: steps.skip_check.outputs.should_skip != 'true'
         working-directory: ${{env.GITHUB_WORKSPACE}}
         run: |
-          & "$env:USERPROFILE\.nuget\packages\ebpf-for-Windows.x64\1.0.0-rc1\build\native\bin\export_program_info.exe" --clear
-          & "$env:USERPROFILE\.nuget\packages\ebpf-for-Windows.x64\1.0.0-rc1\build\native\bin\export_program_info.exe"   
+          # Find the installed ebpf-for-Windows.x64 package folder and call export_program_info.exe
+          $pkg = Get-ChildItem -Path "$env:USERPROFILE\.nuget\packages\ebpf-for-Windows.x64\*" -Directory | Sort-Object Name -Descending | Select-Object -First 1
+          if (-not $pkg) { Write-Host "ebpf-for-Windows.x64 package not found"; exit 0 }
+          $exe = Join-Path $pkg.FullName 'build\native\bin\export_program_info.exe'
+          if (-not (Test-Path $exe)) { Write-Host "export_program_info.exe not found at $exe"; exit 0 }
+          & $exe --clear
+          & $exe
 
       - name: Build
         if: steps.skip_check.outputs.should_skip != 'true'
