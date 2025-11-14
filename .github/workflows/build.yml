@@ -40,6 +40,13 @@ jobs:
           cancel_others: 'false'
           paths_ignore: '["**.md"]'
 
+      - name: Cache Chocolatey packages
+        if: steps.skip_check.outputs.should_skip != 'true'
+        uses: actions/cache@v4
+        with:
+          path: "C:\\ProgramData\\chocolatey\\lib"
+          key: ${{ runner.os }}-choco-${{ hashFiles('**/wdk.props') }}
+
       - name: Install LLVM 18.1.8
         if: steps.skip_check.outputs.should_skip != 'true'
         run: |
@@ -85,7 +92,7 @@ jobs:
         env:
           cache-name: cache-nuget-modules
         with:
-          path: $env:USERPROFILE\.nuget\packages
+          path: "${{ env.USERPROFILE }}\\.nuget\\packages"
           key: ${{ runner.os }}-${{env.BUILD_PLATFORM}}-${{env.BUILD_CONFIGURATION}}-${{ hashFiles('**/wdk.props') }}
 
       - name: Restore NuGet packages
