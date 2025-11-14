@@ -55,10 +55,11 @@ git config --global user.name "github-actions[bot]"
 $repo = $Env:GITHUB_REPOSITORY  # owner/repo
 if (-not $repo) { throw "GITHUB_REPOSITORY not set" }
 
-$cloneUrl = "https://x-access-token:$Env:GITHUB_TOKEN@github.com/$repo.git"
-Write-Host "Cloning $repo"
+$repoUrl = "https://github.com/$repo.git"
+Write-Host "Cloning $repoUrl (using http.extraheader for auth)"
 
-git clone --depth 1 $cloneUrl $tempDir
+# Use http.extraheader to pass the token without embedding it in the URL
+git -c "http.extraheader=AUTHORIZATION: bearer $Env:GITHUB_TOKEN" clone --depth 1 $repoUrl $tempDir
 Push-Location $tempDir
 
 # Ensure empty_branch exists locally - fetch refs
@@ -71,7 +72,7 @@ try {
     New-Item -ItemType File -Name README.md -Value "Empty branch for release binaries" | Out-Null
     git add README.md
     git commit -m "Create empty_branch"
-    git push $cloneUrl empty_branch
+    git -c "http.extraheader=AUTHORIZATION: bearer $Env:GITHUB_TOKEN" push origin empty_branch
     git checkout empty_branch
 }
 
@@ -94,7 +95,7 @@ foreach ($f in $artifactFiles) {
 git add .
 git commit -m "Add release binaries for $branchName"
 
-git push $cloneUrl HEAD:refs/heads/$targetBranch --force
+git -c "http.extraheader=AUTHORIZATION: bearer $Env:GITHUB_TOKEN" push origin HEAD:refs/heads/$targetBranch --force
 
 Pop-Location
 Write-Host "Published release branch: $targetBranch"
